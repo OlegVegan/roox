@@ -1,0 +1,39 @@
+.user-list {
+    width: min(700px, 100%);
+    margin: 0 auto;
+    background-color: white;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    .user-list-item {
+        padding: 16px;
+        height: 22px;
+        position: relative;
+        button {
+            padding: 6px;
+            cursor: pointer;
+            position: absolute;
+            right: 10px;
+            top: 10px;
+        }
+        &:nth-child(2n) {
+            background-color: rgb(243, 243, 243);
+        }
+        &:hover {
+            background-color: rgb(132, 223, 243);
+        }
+    }
+    span {
+        margin-right: 10px;
+    }
+    button {
+        padding: 10px;
+        margin-right: 10px;
+        margin-bottom: 20px;
+        &.active {
+            background-color: rgb(132, 223, 243);
+            border-radius: 5px;
+        }
+    }
+}

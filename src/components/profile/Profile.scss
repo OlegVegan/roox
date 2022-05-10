@@ -1,0 +1,29 @@
+.profile {
+    width: min(700px, 100%);
+    margin: 0 auto;
+    background-color: white;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    margin: 10px;
+    div {
+        margin-bottom: 10px;
+    }
+    input {
+        padding: 10px;
+        width: calc(100% - 30px);
+        margin: 6px 0 14px;
+    }
+    button {
+        padding: 10px;
+        margin-right: 10px;
+    }
+    label {
+        color: rgb(186, 186, 186);
+    }
+}
+
+.warning-input {
+    border: 2px solid tomato;
+}
