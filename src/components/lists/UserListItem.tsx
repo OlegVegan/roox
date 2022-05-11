@@ -22,8 +22,10 @@ export const UserListItem: React.FC<UserItem> = ({ user, setSelectedUserId }) =>
 
     return (
         <div className="user-list-item">
-            <b>{name}</b>, город: {city}, компания {companyName}
-            <button onClick={handleClick}>Подробнее</button>
+            <div className="user-list-item__label"><label>ФИО: </label>{name}</div>
+            <div className="user-list-item__label"><label>Город: </label>{city}</div>
+            <div className="user-list-item__label"><label>Компания: </label>{companyName}</div>
+            <span onClick={handleClick}>Подробнее</span>
         </div>
     )
 }

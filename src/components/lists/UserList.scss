@@ -1,39 +1,45 @@
 .user-list {
-    width: min(700px, 100%);
-    margin: 0 auto;
+    width: 100%;
     background-color: white;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
+    position: relative;
+    padding: 34px;
     .user-list-item {
+        width: 420px;
         padding: 16px;
-        height: 22px;
         position: relative;
-        button {
-            padding: 6px;
-            cursor: pointer;
-            position: absolute;
-            right: 10px;
-            top: 10px;
-        }
+        margin-bottom: 24px;
+        background-color: #f3f3f3;
+        border-radius: 8px;
+        font-weight: 400;
+        line-height: 13px;
         &:nth-child(2n) {
-            background-color: rgb(243, 243, 243);
+            background-color: #e8e8e8;
         }
         &:hover {
-            background-color: rgb(132, 223, 243);
+            background-color: #baedff;
+        }
+        span {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            color: #4b51ef;
+            font-family: Roboto;
+            font-size: 12px;
+            font-weight: 400;
+            line-height: 14px;
+            letter-spacing: 0em;
+            text-align: left;
+            cursor: pointer;
         }
     }
     span {
         margin-right: 10px;
     }
-    button {
-        padding: 10px;
-        margin-right: 10px;
-        margin-bottom: 20px;
-        &.active {
-            background-color: rgb(132, 223, 243);
-            border-radius: 5px;
-        }
+}
+
+.user-list-item__label {
+    margin-bottom: 8px;
+    label {
+        color: #a3a3a3;
     }
 }

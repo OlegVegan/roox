@@ -1,6 +1,7 @@
-import React, { useState, useRef } from "react"
+import React, { useState, useRef, FocusEvent } from "react"
 import { IUser } from '../interfaces/Users'
 import { emailValidation } from '../validation/Email'
+import { LoadingTag } from "../icons/Icons"
 import "./Profile.scss"
 interface Props {
     userList: IUser[] | [],
@@ -17,7 +18,7 @@ export const Profile: React.FC<Props> = ({ userList, selectedUserId, setSelected
     const zipcodeRef = useRef<HTMLInputElement>(null!)
     const phoneRef = useRef<HTMLInputElement>(null!)
     const websiteRef = useRef<HTMLInputElement>(null!)
-    const commentRef = useRef<HTMLInputElement>(null)
+    const commentRef = useRef<HTMLTextAreaElement>(null)
 
     const [userData] = useState<IUser | undefined>(() => {
         return userList.find(u => u.id === selectedUserId)
@@ -25,6 +26,11 @@ export const Profile: React.FC<Props> = ({ userList, selectedUserId, setSelected
     const [canEdit, setCanEdit] = useState(false)
 
     function closeProfile() {
+        // Проверка на случай, если редактируется материал
+        if (canEdit) {
+            if (!window.confirm('Выйти к списку без сохранения изменений?')) return
+        }
+
         setSelectedUserId(null)
     }
 
@@ -32,7 +38,7 @@ export const Profile: React.FC<Props> = ({ userList, selectedUserId, setSelected
         setCanEdit(p => !p)
     }
 
-    function save() {
+    function send() {
         // Проверка обязательных полей на пустоту
         if (!nameRef.current?.value
             || !nicknameRef.current?.value
@@ -45,52 +51,70 @@ export const Profile: React.FC<Props> = ({ userList, selectedUserId, setSelected
         // Валидация почты
         if (!emailValidation(String(emailRef.current?.value))) return alert('Неподходящая почта')
 
-
         // Вывод в консоль сохранённых данных в соответствии задания
         let newData = {
+            id: userData?.id,
             name: nameRef.current.value,
-            nickname: nicknameRef.current.value,
             email: emailRef.current.value,
-            city: cityRef.current.value,
-            street: streetRef.current.value,
-            zipcode: zipcodeRef.current.value,
             phone: phoneRef.current.value,
+            username: nicknameRef.current.value,
             website: websiteRef.current.value,
-            comment: commentRef.current?.value,
+            company: {
+                bs: userData?.company.bs,
+                name: userData?.company.name,
+                catchPhrase: userData?.company.catchPhrase,
+            },
+            address: {
+                city: cityRef.current.value,
+                street: streetRef.current.value,
+                suite: userData?.address.suite,
+                zipcode: zipcodeRef.current.value,
+                geo: {
+                    lat: userData?.address.geo.lat,
+                    lng: userData?.address.geo.lng,
+                },
+            },
+            comment: commentRef.current?.value
         }
 
-        console.log('Вывод объекта по заданию')
+        // В задании не сказано выводить ли объект по схеме оригинального или создать новый, я решил вывести по старой схеме
+        console.log('Вывод объекта по заданию:')
         console.log(newData)
 
         setCanEdit(p => !p)
     }
 
-    if (!userData) return <></>
+    function inputCheck(e: FocusEvent<HTMLInputElement>) {
+        if (!e.target.value) return e.target.classList.add('warning')
+        return e.target.classList.remove('warning')
+    }
+
+    if (!userData) return <LoadingTag />
     return (
         <div className="profile">
-            <button onClick={closeProfile}>Вернуться к списку</button>
+            <button className="profile-edit-btn" onClick={closeProfile}>Вернуться к списку</button>
             <h3>Данные пользователя</h3>
             <label>Имя: </label>
-            <input ref={nameRef} type={'text'} disabled={!canEdit} defaultValue={userData.name} />
+            <input ref={nameRef} type={'text'} disabled={!canEdit} defaultValue={userData.name} onBlur={(e) => inputCheck(e)} />
             <label>Никнейм: </label>
-            <input ref={nicknameRef} type={'text'} disabled={!canEdit} defaultValue={userData.username} />
+            <input ref={nicknameRef} type={'text'} disabled={!canEdit} defaultValue={userData.username} onBlur={(e) => inputCheck(e)} />
             <label>Почта: </label>
-            <input ref={emailRef} type={'text'} disabled={!canEdit} defaultValue={userData.email} />
+            <input ref={emailRef} type={'text'} disabled={!canEdit} defaultValue={userData.email} onBlur={(e) => inputCheck(e)} />
             <label>Город: </label>
-            <input ref={cityRef} type={'text'} disabled={!canEdit} defaultValue={userData.address.city} />
+            <input ref={cityRef} type={'text'} disabled={!canEdit} defaultValue={userData.address.city} onBlur={(e) => inputCheck(e)} />
             <label>Улица: </label>
-            <input ref={streetRef} type={'text'} disabled={!canEdit} defaultValue={userData.address.street} />
+            <input ref={streetRef} type={'text'} disabled={!canEdit} defaultValue={userData.address.street} onBlur={(e) => inputCheck(e)} />
             <label>Индекс: </label>
-            <input ref={zipcodeRef} type={'text'} disabled={!canEdit} defaultValue={userData.address.zipcode} />
+            <input ref={zipcodeRef} type={'text'} disabled={!canEdit} defaultValue={userData.address.zipcode} onBlur={(e) => inputCheck(e)} />
             <label>Телефон: </label>
-            <input ref={phoneRef} type={'text'} disabled={!canEdit} defaultValue={userData.phone} />
+            <input ref={phoneRef} type={'text'} disabled={!canEdit} defaultValue={userData.phone} onBlur={(e) => inputCheck(e)} />
             <label>Сайт: </label>
-            <input ref={websiteRef} type={'text'} disabled={!canEdit} defaultValue={userData.website} />
+            <input ref={websiteRef} type={'text'} disabled={!canEdit} defaultValue={userData.website} onBlur={(e) => inputCheck(e)} />
             <label>Комментарий: </label>
-            <input ref={commentRef} type={'text'} disabled={!canEdit} defaultValue={''} />
-            <div>Все поля обязательны, кроме комментария</div>
-            <button onClick={toggleEditing}>Редактировать</button>
-            {canEdit && <button onClick={save}>Сохранить</button>}
+            <textarea ref={commentRef} disabled={!canEdit} defaultValue={''} ></textarea>
+            <button className="profile-edit-btn" onClick={toggleEditing}>Редактировать</button>
+            {canEdit && <button className="profile-send-btn" onClick={send}>Отправить</button>}
+            {canEdit && <div className="profile-msg">Все поля обязательны, кроме комментария</div>}
         </div>
     )
 }
