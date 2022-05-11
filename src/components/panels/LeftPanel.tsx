@@ -23,7 +23,7 @@ export const LeftPanel: React.FC<Props> = ({ filter, setFilter, selectedUserId, 
             <h3>Сортировка</h3>
             <button onClick={() => handleClick('name')} className={filter === 'name' ? 'active' : ""}>по имени</button>
             <button onClick={() => handleClick('city')} className={filter === 'city' ? 'active' : ""}>по городу</button>
-            <button onClick={() => handleClick('company')} className={filter === 'city' ? 'active' : ""}>по компании</button>
+            <button onClick={() => handleClick('company')} className={filter === 'company' ? 'active' : ""}>по компании</button>
         </div>
     )
 }

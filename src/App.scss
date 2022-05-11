@@ -14,13 +14,12 @@
     font-family: Roboto;
     font-weight: 400;
     text-align: left;
-    background: #4b51ef;
     border-radius: 5px;
     border: 0;
     margin-bottom: 10px;
     cursor: pointer;
     &.active {
-      background-color: #4b51ef;
+      background-color: #8185f8;
     }
   }
 }
