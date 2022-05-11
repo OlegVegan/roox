@@ -1,4 +1,5 @@
-### Текст задания: https://roox.notion.site/frontend-32b79baef66c4ca4a27f6f76e01a7dd2
+### Для задания: https://roox.notion.site/frontend-32b79baef66c4ca4a27f6f76e01a7dd2
+### Текст задания:
 
 Данные пользователей [https://jsonplaceholder.typicode.com/users](https://jsonplaceholder.typicode.com/users)
 
