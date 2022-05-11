@@ -92,29 +92,32 @@ export const Profile: React.FC<Props> = ({ userList, selectedUserId, setSelected
     if (!userData) return <LoadingTag />
     return (
         <div className="profile">
-            <button className="profile-edit-btn" onClick={closeProfile}>Вернуться к списку</button>
-            <h3>Данные пользователя</h3>
-            <label>Имя: </label>
-            <input ref={nameRef} type={'text'} disabled={!canEdit} defaultValue={userData.name} onBlur={(e) => inputCheck(e)} />
-            <label>Никнейм: </label>
-            <input ref={nicknameRef} type={'text'} disabled={!canEdit} defaultValue={userData.username} onBlur={(e) => inputCheck(e)} />
-            <label>Почта: </label>
-            <input ref={emailRef} type={'text'} disabled={!canEdit} defaultValue={userData.email} onBlur={(e) => inputCheck(e)} />
-            <label>Город: </label>
-            <input ref={cityRef} type={'text'} disabled={!canEdit} defaultValue={userData.address.city} onBlur={(e) => inputCheck(e)} />
-            <label>Улица: </label>
-            <input ref={streetRef} type={'text'} disabled={!canEdit} defaultValue={userData.address.street} onBlur={(e) => inputCheck(e)} />
-            <label>Индекс: </label>
-            <input ref={zipcodeRef} type={'text'} disabled={!canEdit} defaultValue={userData.address.zipcode} onBlur={(e) => inputCheck(e)} />
-            <label>Телефон: </label>
-            <input ref={phoneRef} type={'text'} disabled={!canEdit} defaultValue={userData.phone} onBlur={(e) => inputCheck(e)} />
-            <label>Сайт: </label>
-            <input ref={websiteRef} type={'text'} disabled={!canEdit} defaultValue={userData.website} onBlur={(e) => inputCheck(e)} />
-            <label>Комментарий: </label>
-            <textarea ref={commentRef} disabled={!canEdit} defaultValue={''} ></textarea>
-            <button className="profile-edit-btn" onClick={toggleEditing}>Редактировать</button>
-            {canEdit && <button className="profile-send-btn" onClick={send}>Отправить</button>}
-            {canEdit && <div className="profile-msg">Все поля обязательны, кроме комментария</div>}
+            <div className="profile-header">
+                <button className="profile-edit-btn" onClick={toggleEditing}>Редактировать</button>
+                <div className="profile-header-label">Данные пользователя</div>
+            </div>
+            <div className="profile-data">
+                <label>Имя: </label>
+                <input ref={nameRef} type={'text'} disabled={!canEdit} defaultValue={userData.name} onBlur={(e) => inputCheck(e)} />
+                <label>Никнейм: </label>
+                <input ref={nicknameRef} type={'text'} disabled={!canEdit} defaultValue={userData.username} onBlur={(e) => inputCheck(e)} />
+                <label>Почта: </label>
+                <input ref={emailRef} type={'text'} disabled={!canEdit} defaultValue={userData.email} onBlur={(e) => inputCheck(e)} />
+                <label>Город: </label>
+                <input ref={cityRef} type={'text'} disabled={!canEdit} defaultValue={userData.address.city} onBlur={(e) => inputCheck(e)} />
+                <label>Улица: </label>
+                <input ref={streetRef} type={'text'} disabled={!canEdit} defaultValue={userData.address.street} onBlur={(e) => inputCheck(e)} />
+                <label>Индекс: </label>
+                <input ref={zipcodeRef} type={'text'} disabled={!canEdit} defaultValue={userData.address.zipcode} onBlur={(e) => inputCheck(e)} />
+                <label>Телефон: </label>
+                <input ref={phoneRef} type={'text'} disabled={!canEdit} defaultValue={userData.phone} onBlur={(e) => inputCheck(e)} />
+                <label>Сайт: </label>
+                <input ref={websiteRef} type={'text'} disabled={!canEdit} defaultValue={userData.website} onBlur={(e) => inputCheck(e)} />
+                <label>Комментарий: </label>
+                <textarea ref={commentRef} disabled={!canEdit} defaultValue={''} ></textarea>
+                <button className="profile-back-btn" onClick={closeProfile}>Вернуться к списку</button>
+                {canEdit && <button className="profile-send-btn" onClick={send}>Отправить</button>}
+            </div>
         </div>
     )
 }
