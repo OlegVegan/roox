@@ -1,6 +1,4 @@
-# Задание, которое я выполнил:
-
-## https://roox.notion.site/frontend-32b79baef66c4ca4a27f6f76e01a7dd2
+### Текст задания: https://roox.notion.site/frontend-32b79baef66c4ca4a27f6f76e01a7dd2
 
 Данные пользователей [https://jsonplaceholder.typicode.com/users](https://jsonplaceholder.typicode.com/users)
 
@@ -12,8 +10,7 @@
 - Реализовать SPA с использованием TypeScript
 - Препроцессор scss
 - Переиспользование блоков
-- Разделение кода на React-компоненты (презентационные и компоненты-контейнеры)
-    
+- Разделение кода на React-компоненты (презентационные и компоненты-контейнеры)    
 - Webpack
     
     
